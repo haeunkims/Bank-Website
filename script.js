@@ -28,7 +28,7 @@ document.addEventListener("keydown", function (e) {
     closeModal();
   }
 });
-console.log("hi");
+
 //adding smooth scrolling
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
@@ -44,4 +44,25 @@ btnScrollTo.addEventListener("click", function (e) {
   // });
   //modern way to implement only in modern browsers
   section1.scrollIntoView({ behavior: "smooth" });
+});
+//Page Navigation
+
+// document.querySelectorAll(".nav__link").forEach(function (el) {
+//   el.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute("href");
+//     document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+//   });
+// });
+
+// Event Delegation (instead of passing id to different events)
+//1. add event listener to common parent element
+//2. Determine what element originated the event
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  e.preventDefault();
+  //Matching Strategy
+  if (e.target.classList.contains(".nav__link")) {
+    const id = e.target.getAttribute("href");
+    document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+  }
 });
